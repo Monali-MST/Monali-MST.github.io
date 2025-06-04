@@ -19,6 +19,69 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+<script>
+  fetch('https://pmt-server.azurewebsites.net/api/public/projects', {
+    method: 'GET',
+    headers: {
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2RkMDQ5OTE4NjYzZTU3MDg4ZmVkODUiLCJvcmlnaW4iOiJodHRwczovL21vbmFsaS1tc3QuZ2l0aHViLmlvLyIsImV4cCI6NDkwNDcwNDQ4NiwiaXNzIjoiaHR0cHM6Ly9wbXQuYXp1cmV3ZWJzaXRlcy5uZXQvIiwiYXVkIjoiaHR0cHM6Ly9wbXQtb2ZmaWNpYWwud2ViLmFwcC8ifQ.FBXzK_e1QcDqD-pZFDTN95X6vYE-QVt5yxr41YIk8x4', // Replace with actual secure token
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(data => {
+    const container = document.getElementById('project-container');
+    if (!container) {
+      console.error('Project container not found.');
+      return;
+    }
+
+    data.forEach(project => {
+      const {
+        banner,
+        title,
+        gitHub,
+        web,
+        technologies,
+        description,
+        startYear,
+        startMonth,
+        endYear,
+        endMonth,
+        isCurrent
+      } = project;
+
+      const techStack = technologies ? technologies.join(', ') : 'Technologies not listed';
+
+      const projectCard = document.createElement('div');
+      projectCard.className = 'col-md-3';
+
+      projectCard.innerHTML = `
+        <div class="project img shadow ftco-animate d-flex justify-content-center align-items-center" style="background-image: url('${banner}');">
+          <div class="overlay"></div>
+          <div class="text text-center p-4">
+            <h3><a href="${gitHub}" target="_blank">${title}</a></h3>
+            <span>${techStack}</span>
+            <p style="font-size: 12px; margin-top: 10px;">${description}</p>
+            <p style="font-size: 12px;">${startMonth}/${startYear} - ${isCurrent ? 'Present' : `${endMonth}/${endYear}`}</p>
+            ${web ? `<a href="${web}" target="_blank" style="font-size: 12px;">Visit Website</a>` : ''}
+          </div>
+        </div>
+      `;
+
+      container.appendChild(projectCard);
+    });
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+</script>
+
 	
 	
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target" id="ftco-navbar">
@@ -489,6 +552,10 @@
 		</div>
 	</section>
 
+	<div class="row" id="project-container">
+  <!-- Project cards will be dynamically inserted here -->
+</div>
+<!-- 
 	<section class="ftco-section ftco-project" id="projects-section">
 		<div class="container-fluid px-md-4">
 			<div class="row justify-content-center pb-5">
@@ -538,7 +605,7 @@
 
 			</div>
 		</div>
-	</section>
+	</section> -->
 
 	<section class="ftco-section testimony-section bg-primary">
 		<div class="container">
