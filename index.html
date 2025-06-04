@@ -74,16 +74,27 @@
               const projectCard = document.createElement("div");
               projectCard.className = "col-md-3";
 
-              projectCard.innerHTML = `
+            //   projectCard.innerHTML = `
 		
-					<div class="project img shadow ftco-animate d-flex justify-content-center align-items-center" style="background-image: "${banner}"";">
+			// 		<div class="project img shadow ftco-animate d-flex justify-content-center align-items-center" style="background-image: "${banner}"";">
+			// 			<div class="overlay"></div>
+			// 			<div class="text text-center p-4">
+			// 				<h3><a href="${gitHub}">${title}</a></h3>
+			// 				<span>Desktop Application</span>
+			// 			</div>
+			// 		</div>
+			// 	`;
+
+			projectCard.innerHTML = `
+			<div class="col-md-3">
+					<div class="project img shadow ftco-animate d-flex justify-content-center align-items-center" style="background-image: url(images/work-1.jpg);">
 						<div class="overlay"></div>
 						<div class="text text-center p-4">
-							<h3><a href="${gitHub}">${title}</a></h3>
+							<h3><a href="https://github.com/Monali-MST/Base-Calc">Base-Calc</a></h3>
 							<span>Desktop Application</span>
 						</div>
 					</div>
-				`;
+				</div>`
 
               container.appendChild(projectCard);
             });
@@ -782,7 +793,7 @@
       </div>
     </section>
 
-    <!-- <section class="ftco-section ftco-project" id="projects-section">
+    <section class="ftco-section ftco-project" id="projects-section">
 		<div class="container-fluid px-md-4">
 			<div class="row justify-content-center pb-5">
 				<div class="col-md-12 heading-section text-center ftco-animate">
@@ -831,7 +842,7 @@
 
 			</div>
 		</div>
-	</section> -->
+	</section>
 
     <section class="ftco-section testimony-section bg-primary">
       <div class="container">
